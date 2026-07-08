@@ -13,7 +13,7 @@ export const getAccessToken = () => {
 };
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api",
   withCredentials: true,
 });
 
@@ -60,7 +60,7 @@ api.interceptors.response.use(
       try {
         // Call refresh endpoint to get new access token
         const response = await axios.post(
-          "http://localhost:5000/api/auth/refresh",
+          `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api"}/auth/refresh`,
           {},
           { withCredentials: true }
         );
