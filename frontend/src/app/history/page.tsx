@@ -35,6 +35,7 @@ export default function HistoryPage() {
   const [history, setHistory] = useState<SavedAnalysis[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedAnalysis, setSelectedAnalysis] = useState<SavedAnalysis | null>(null);
+  const [isMobileDetailOpen, setIsMobileDetailOpen] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -110,12 +111,12 @@ export default function HistoryPage() {
         </div>
 
         <div className="max-w-6xl mx-auto w-full relative z-10 flex-1 flex flex-col">
-          <div className="mb-8">
-            <h1 className="text-4xl font-bold flex items-center gap-2">
-              <History className="h-8 w-8 text-primary-blue" />
+          <div className="mb-6 sm:mb-8">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold flex items-center gap-2">
+              <History className="h-6 w-6 sm:h-8 sm:w-8 text-primary-blue" />
               Analysis History
             </h1>
-            <p className="text-muted-foreground mt-1">
+            <p className="text-xs sm:text-sm text-muted-foreground mt-1">
               Review and track your resume matching history and ATS performance.
             </p>
           </div>
@@ -150,14 +151,17 @@ export default function HistoryPage() {
               </Button>
             </Card>
           ) : (
-            <div className="grid lg:grid-cols-3 gap-8 flex-1 items-start">
+            <div className="grid lg:grid-cols-3 gap-6 lg:gap-8 flex-1 items-start w-full">
               
               {/* History List Side */}
-              <div className="space-y-4 lg:col-span-1 max-h-[calc(100vh-16rem)] overflow-y-auto pr-2 custom-scrollbar">
+              <div className={`space-y-4 lg:col-span-1 max-h-[calc(100vh-16rem)] overflow-y-auto pr-2 custom-scrollbar ${isMobileDetailOpen ? "hidden lg:block" : "block"}`}>
                 {history.map((item) => (
                   <div
                     key={item._id}
-                    onClick={() => setSelectedAnalysis(item)}
+                    onClick={() => {
+                      setSelectedAnalysis(item);
+                      setIsMobileDetailOpen(true);
+                    }}
                     className={`cursor-pointer p-4 rounded-2xl border transition-all glass-card ${
                       selectedAnalysis?._id === item._id
                         ? "border-primary-blue bg-primary-blue/5 scale-[1.01]"
@@ -187,9 +191,17 @@ export default function HistoryPage() {
               </div>
 
               {/* Detail View Side */}
-              <div className="lg:col-span-2 space-y-6">
+              <div className={`lg:col-span-2 space-y-6 ${isMobileDetailOpen ? "block" : "hidden lg:block"}`}>
                 {selectedAnalysis ? (
                   <div className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-300">
+                    
+                    {/* Mobile Back Button */}
+                    <button
+                      onClick={() => setIsMobileDetailOpen(false)}
+                      className="lg:hidden cursor-pointer text-sm font-medium flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 hover:bg-black/10 hover:dark:bg-white/10 transition-all text-muted-foreground hover:text-foreground"
+                    >
+                      ← Back to History List
+                    </button>
                     
                     {/* Top Stats */}
                     <div className="grid sm:grid-cols-3 gap-6">

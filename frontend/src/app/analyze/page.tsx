@@ -159,7 +159,7 @@ export default function AnalyzePage() {
             sparkCount={8}
             duration={450}
         >
-            <main className="min-h-screen bg-background text-foreground pt-28 pb-16 px-6 relative overflow-hidden">
+            <main className="min-h-screen bg-background text-foreground pt-24 sm:pt-28 pb-16 px-4 sm:px-6 relative overflow-hidden">
                 <div className="absolute inset-0 pointer-events-none">
                     <DotField
                         dotRadius={1.2}
@@ -174,19 +174,19 @@ export default function AnalyzePage() {
                     />
                 </div>
 
-                <div className="max-w-4xl mx-auto relative z-10">
+                <div className="max-w-4xl mx-auto relative z-10 w-full">
 
-                    <h1 className="text-5xl font-bold text-center text-foreground">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-foreground">
                         Resume<span className="text-primary-blue">IQ</span>
                     </h1>
 
-                    <p className="text-center text-muted-foreground mt-3">
+                    <p className="text-center text-muted-foreground mt-3 text-sm sm:text-base">
                         Upload your resume and compare it against any Job Description.
                     </p>
 
                     <Card className="mt-6 glass-card rounded-2xl">
 
-                        <CardContent className="space-y-4 p-5">
+                        <CardContent className="space-y-4 p-4 sm:p-5">
 
                             <div>
                                 <label className="font-medium text-foreground text-sm">
@@ -199,7 +199,7 @@ export default function AnalyzePage() {
                                     onDragLeave={handleDrag}
                                     onDrop={handleDrop}
                                     onClick={triggerFileInput}
-                                    className={`mt-1.5 flex flex-col items-center justify-center py-5 px-6 rounded-xl border-2 border-dashed transition-all cursor-pointer ${
+                                    className={`mt-1.5 flex flex-col items-center justify-center py-5 px-4 sm:px-6 rounded-xl border-2 border-dashed transition-all cursor-pointer ${
                                         dragActive
                                             ? "border-primary-blue bg-primary-blue/5"
                                             : "border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 backdrop-blur-md hover:bg-black/10 hover:dark:bg-white/10 hover:border-primary-blue/40"
@@ -213,9 +213,9 @@ export default function AnalyzePage() {
                                         onChange={handleFileChange}
                                     />
                                     {resume ? (
-                                        <div className="flex flex-col items-center space-y-1.5 pointer-events-none">
+                                        <div className="flex flex-col items-center space-y-1.5 pointer-events-none w-full">
                                             <FileText className="h-8 w-8 text-primary-blue animate-pulse" />
-                                            <span className="font-semibold text-foreground text-sm text-center max-w-xs truncate">
+                                            <span className="font-semibold text-foreground text-sm text-center max-w-[200px] sm:max-w-xs truncate">
                                                 {resume.name}
                                             </span>
                                             <span className="text-xs text-muted-foreground">
