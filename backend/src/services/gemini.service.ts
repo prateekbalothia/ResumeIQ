@@ -24,7 +24,7 @@ ${jobDescription}
 
   const response = await retryWithBackoff(() =>
     ai.models.generateContent({
-      model: process.env.GEMINI_MODEL || "gemini-3.1-flash",
+      model: process.env.GEMINI_MODEL || "gemini-3.1-flash-lite",
       contents: prompt,
     })
   );
